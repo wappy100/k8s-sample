@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: ds-sample
+  labels:
+    app: ds-sample
+    version: v1
+spec:
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: ds-sample-pod
+    spec:
+      containers:
+        - image: busybox
+          name: busybox
+          command: [ "sleep", "100000010000" ]
+      terminationGracePeriodSeconds: 0
